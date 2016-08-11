@@ -1,0 +1,61 @@
+Esse arquivo README esta associado ao branch do usuário:
+
+Nome do usuário desse branch: Master
+
+############################################################
+#             Comandos básicos GIT
+############################################################
+
+Todos os alunos devem criar um branch com o seu nome e mantar esse branch atualizado com os fontes de seus projetos.
+Um branch pode ser criado com o comando:
+
+    git branch <nome do branch>
+
+Uma vez criado o aluno pode entrar no seu branch utilizando o comando
+
+    git checkout <nome do branch>
+
+Após editar uma série de arquivos, para verificar quais estão diferentes da versão do repositório
+
+    git status
+
+Para verificar a diferença entre o arquivo local e a versão do repositório
+
+    git diff <nome do arquivo>
+
+Para comitar algum arquivo no seu repositório local o aluno deve primeiro adicionar esse arquivo na lista de índice por meio do comando
+
+    git add <nome do arquivo>
+
+Para efetuar o comit o camando a ser utilizado será
+
+    git commit
+
+Após o commit ser efetuado será necessário enviar os arquivos par o respositório principal no GitHub via o comando:
+
+    git push
+
+Para subir o branch criado para o repositório principal usem o comando:
+
+    git push --set-upstream origin <nome do branch>
+
+Para buscar atualizações de outros branchs, usem os comandos
+
+    # caso o branch seja o master coloquem "origin/master"
+    git merge <nome do branch>
+
+############################################################
+#             Configurações do ambiente Python
+############################################################
+Adicione no arquivo /etc/profile o endereço do diretório onde o Python esta instalado e o diretório de Scripts
+
+export PATH=$PATH:/c/Python34
+export PATH=$PATH:/c/Python34/Scripts
+
+Pelo terminal do windows ou pelo git bash instale os seguintes pacotes pelo comando pip
+
+pip install jsonrpclib-pelix
+pip install rpyc
+pip install python3-memcached
+pip install pyzmq
+Contact GitHub 
