@@ -1,3 +1,3 @@
 # Batalha Naval
 
-Pedro Rorigues
+Pedro Rodrigues
