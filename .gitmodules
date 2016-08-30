@@ -1,0 +1,3 @@
+[submodule "NavalBattle"]
+	path = NavalBattle
+	url = git@github.com:hpedrorodrigues/NavalBattle.git
