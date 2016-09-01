@@ -1,30 +1,30 @@
 import batalhanaval
 
-print("~~~~~~~~~~Bem-vindo ao Jogo~~~~~~~~~~")
+print("\n********** Bem-vindo ao Jogo **********\n")
 
 ## bloco de métodos	
 def exibirMenu(partida):
 
-	print("")
-	print("-----------------------------")
+	if partida.ativa == "S":	
+		print("----------------------------------------")
+		print("Jogadas restante: " , partida.jogadaRestante)	
+		print("Jogadas realizadas: " , partida.obterJogadasRealizadas())			
+		print("Acertos: " , partida.obterAcertos())	
+		print("----------------------------------------")
+	
 	if partida.ativa == "N":
 		print("1. Iniciar")
 	if partida.ativa == "S":
 		print("2. Disparar")
-		
-	print("7. Carregar jogo")
+	
+	if partida.ativa == "N":
+		print("7. Carregar jogo")
 	
 	if partida.ativa == "S":
 		print("8. Salvar jogo")
 		
 	print("9. Sair")
 	
-	if partida.ativa == "S":
-		print("")
-		print("Jogadas restante: " , partida.jogadaRestante)
-	print("-----------------------------")
-
-
 def iniciarPartida(partida):	
 	partida.definirTabuleiro()
 		
@@ -39,8 +39,7 @@ def salvar(partida):
 	
 def carregar(partida):
 	iniciarPartida(partida)
-	partida.carregarJogo()
-	print(partida)
+	partida.carregarJogo()	
 
 #####################
 ## bloco principal ##

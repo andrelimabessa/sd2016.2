@@ -11,20 +11,39 @@ class Tabuleiro(object):
 		self.matriz[2][4].conteudo = "B"
 		self.matriz[3][4].conteudo = "B"		
 	
-	def obterPosicoesNaoVerificadas(self):
-				
+	def definirBarco(self, i, j):
+		self.matriz[i][j].conteudo = "B"
+		
+	def definirAcerto(self, i, j):
+		self.matriz[i][j].acerto = "S"
+		
+	def marcarPosicaoVerificada(self, i, j):
+		self.matriz[i][j].verificada = "S"
+	
+	def obterPosicoesVerificadas(self):				
 		lista = []
 		for i in range(self.tamanho): 
 			for j in range(self.tamanho): 	
-				if self.matriz[i][j].verificada == "S":
-					print("verificada")
+				if self.matriz[i][j].verificada == "S":					
+					lista.append({"linha": i, "coluna":j})			
+		return lista		
+
+	def obterPosicoesAcerto(self):				
+		lista = []
+		for i in range(self.tamanho): 
+			for j in range(self.tamanho): 	
+				if self.matriz[i][j].acerto == "S":					
 					lista.append({"linha": i, "coluna":j})
-		
-		print(lista)
+		return lista			
+	
+	def obterBarcos(self):
+		lista = []
+		for i in range(self.tamanho): 
+			for j in range(self.tamanho): 	
+				if self.matriz[i][j].conteudo == "B":
+					lista.append({"linha": i, "coluna":j})
 		return lista
-		##valores = [ [ j for j in range(self.tamanho) ] for i in range(self.tamanho) if self.matriz[0][0].verificada == "S" ]			
-		
-		
+	
 	def verificarJogada(self, i, j):
 		if self.tamanho < i+1:
 			raise Exception("Tamanho máximo para (i) excedido. Máximo:" + str(self.tamanho-1))
@@ -32,17 +51,24 @@ class Tabuleiro(object):
 		if self.tamanho < j+1:
 			raise Exception("Tamanho máximo para (j) excedido. Máximo: " + str(self.tamanho-1))
 		
-		self.matriz[i][j].verificada = "S" ## marca posição como verificada
-		
-		if self.matriz[i][j].conteudo == "B":		
-			print("")
-			print("!!!!!!!!!!!!!!!!!!!!!!!!")
-			print("!!!!!!!!Booooom!!!!!!!!!")
-			print("!!!!!!!!!!!!!!!!!!!!!!!!")
-			print("")
+		if self.matriz[i][j].verificada == "S":		
+			print("\n*** Posição já verificada ***")
+			return False;
 		else:
-			print("")
-			print("~~~~~~~~~~~~~~~~~~~~~~~~")
-			print("~~~~~~~~~~Água~~~~~~~~~~")
-			print("~~~~~~~~~~~~~~~~~~~~~~~~")
-			print("")
+			self.matriz[i][j].verificada = "S" ## marca posição como verificada
+			
+			if self.matriz[i][j].conteudo == "B":
+				self.matriz[i][j].acerto = "S"
+				print("")
+				print("!!!!!!!!!!!!!!!!!!!!!!!!")
+				print("!!!!!!  Booooom  !!!!!!!")
+				print("!!!!!!!!!!!!!!!!!!!!!!!!")
+				print("")
+			else:
+				self.matriz[i][j].acerto = "N"
+				print("")
+				print("~~~~~~~~~~~~~~~~~~~~~~~~")
+				print("~~~~~~~   Água   ~~~~~~~")
+				print("~~~~~~~~~~~~~~~~~~~~~~~~")
+				print("")
+			return True;
