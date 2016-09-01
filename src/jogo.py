@@ -1,10 +1,10 @@
 import batalhanaval
+import os
 
 print("\n********** Bem-vindo ao Jogo **********\n")
 
 ## bloco de métodos	
-def exibirMenu(partida):
-
+def exibirMenu(partida):	
 	if partida.ativa == "S":	
 		print("----------------------------------------")
 		print("Jogadas restante: " , partida.jogadaRestante)	
@@ -34,12 +34,13 @@ def disparar(partida):
 	
 	partida.atirar( int(x),int(y) );
 	
+	
 def salvar(partida):
 	partida.salvarJogo()
 	
 def carregar(partida):
 	iniciarPartida(partida)
-	partida.carregarJogo()	
+	partida.carregarJogo()
 
 #####################
 ## bloco principal ##
@@ -47,14 +48,16 @@ def carregar(partida):
 
 partida = batalhanaval.BatalhaNaval(5, 5)
 
-while 1 == 1:		
+while 1 == 1:
+	## os.system('cls')
 	exibirMenu(partida)
 	menu = input("O que deseja fazer: ")
 	
-	if menu == "1":
+	os.system('cls')
+	if menu == "1":		
 		iniciarPartida(partida)
 		
-	if menu == "2":
+	if menu == "2":		
 		disparar(partida)
 		
 	if menu == "7":

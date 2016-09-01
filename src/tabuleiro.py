@@ -22,16 +22,16 @@ class Tabuleiro(object):
 	
 	def obterPosicoesVerificadas(self):				
 		lista = []
-		for i in range(self.tamanho): 
-			for j in range(self.tamanho): 	
+		for j in range(self.tamanho): 
+			for i in range(self.tamanho): 	
 				if self.matriz[i][j].verificada == "S":					
 					lista.append({"linha": i, "coluna":j})			
 		return lista		
 
 	def obterPosicoesAcerto(self):				
 		lista = []
-		for i in range(self.tamanho): 
-			for j in range(self.tamanho): 	
+		for j in range(self.tamanho): 
+			for i in range(self.tamanho): 	
 				if self.matriz[i][j].acerto == "S":					
 					lista.append({"linha": i, "coluna":j})
 		return lista			
