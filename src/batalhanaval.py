@@ -47,6 +47,8 @@ class BatalhaNaval(object):
 		for pos in acertos:
 			arq.write("{0},{1}|".format(pos["linha"], pos["coluna"]))
 			
+		print("\n*** jogo salvo ***")		
+			
 	def obterJogadasRealizadas(self):
 		lista = self.tabuleiro.obterPosicoesVerificadas()
 		retorno = [{item["linha"], item["coluna"]} for item in lista]
