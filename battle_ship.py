@@ -57,4 +57,24 @@ class BattleShip(object):
             "board": self.criar_tabuleiro(5, 5),
             "count": 0
         }
+    def move_count(self):
+        print("Restam: " + str(self.max - self.count) + " jogadas!")
 
+
+    def mostrar_tabuleiro(self):
+        self.mostrar_legenda()
+        print("------------------------")
+        print("------- Tabuleiro ------")
+        print("------------------------", end="\n")
+        for x in range(self.rows):
+            print("| ", end="")
+            for y in range(self.cols):
+                value = self.game[x][y]
+                if value == Objeto.agua or value == Objeto.navio:
+                    print(" 🌊 ", end=" ")
+                elif value == Objeto.abatido:
+                    print(" 🚩 ", end=" ")
+                else:
+                    print(" 💣 ", end=" ")
+            print(" |", end="\n")
+        print("------------------------")

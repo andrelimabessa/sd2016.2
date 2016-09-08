@@ -19,6 +19,14 @@ class BattleInit(object):
         #instancia Jogo BattleShip
         self.battle = BattleShip()
 
+    def mostrar_legenda(self):
+        print("------------------------")
+        print(" 🌊 = Água")
+        print(" 🚤 = Navio")
+        print(" 🚩 = Abatido")
+        print(" 💣 = Bomba")
+        print("------------------------")
+
     def mostrar_opcoes(self):
         print("|------------------ OPÇÕES ---------------------------|")
         print("|-1 -> SAIR                                           |")
@@ -35,6 +43,25 @@ class BattleInit(object):
         #c = input("\nInforme:\n")
         self.battle.move(int(l), int(c))
 
+
+    def mostrar_tabuleiro(self):
+        self.mostrar_legenda()
+        print("------------------------")
+        print("------- Tabuleiro ------")
+        print("------------------------", end="\n")
+        for x in range(self.rows):
+            print("| ", end="")
+            for y in range(self.cols):
+                value = self.game[x][y]
+                if value == Objeto.agua or value == Objeto.navio:
+                    print(" 🌊 ", end=" ")
+                elif value == Objeto.abatido:
+                    print(" 🚩 ", end=" ")
+                else:
+                    print(" 💣 ", end=" ")
+            print(" |", end="\n")
+        print("------------------------")
+
     def iniciar(self):
         self.mostrar_opcoes()
         c = input("Informe a opção:\n")
@@ -42,11 +69,10 @@ class BattleInit(object):
         while c != Opcoes.clear:
  
             Console.clear()
-
-            self.battle.print_current_move_count()
+            self.battle.move_count()
 
             if c == Opcoes.move:
-                self.move_action()
+                self.mover()
 
             elif c == Opcoes.board:
                 self.battle.mostrar_tabuleiro()
