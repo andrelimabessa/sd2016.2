@@ -21,46 +21,29 @@ class BattleInit(object):
 
     def mostrar_legenda(self):
         print("------------------------")
-        print(" 🌊 = Água")
-        print(" 🚤 = Navio")
-        print(" 🚩 = Abatido")
-        print(" 💣 = Bomba")
+        print(" ~ = Água")
+        print(" v = Navio")
+        print(" a = Abatido")
+        print(" b = Bomba")
         print("------------------------")
 
     def mostrar_opcoes(self):
         print("|------------------ OPÇÕES ---------------------------|")
-        print("|-1 -> SAIR                                           |")
+        print("|-1 -> MOVER                                          |")
         print("|-2 -> JOGAR                                          |")
         print("|-3 -> MOSTRAR JOGO                                   |")
         print("|-4 -> MOSTRAR TABULEIRO                              |")
         print("|-5 -> REINICIAR                                      |")
-        print("|-6 -> clear                                          |")
+        print("|-6 -> SAIR                                           |")
         print("|-----------------------------------------------------|", end="\n\n")
 
     def mover(self):
+        self.mostrar_legenda()
         self.battle.mostrar_tabuleiro()
         l = input("\nInforme posição(x,y):\n")
         #c = input("\nInforme:\n")
         self.battle.move(int(l), int(c))
 
-
-    def mostrar_tabuleiro(self):
-        self.mostrar_legenda()
-        print("------------------------")
-        print("------- Tabuleiro ------")
-        print("------------------------", end="\n")
-        for x in range(self.rows):
-            print("| ", end="")
-            for y in range(self.cols):
-                value = self.game[x][y]
-                if value == Objeto.agua or value == Objeto.navio:
-                    print(" 🌊 ", end=" ")
-                elif value == Objeto.abatido:
-                    print(" 🚩 ", end=" ")
-                else:
-                    print(" 💣 ", end=" ")
-            print(" |", end="\n")
-        print("------------------------")
 
     def iniciar(self):
         self.mostrar_opcoes()
@@ -71,6 +54,7 @@ class BattleInit(object):
             Console.clear()
             self.battle.move_count()
 
+            # OPÇÃO 1
             if c == Opcoes.move:
                 self.mover()
 
@@ -80,6 +64,7 @@ class BattleInit(object):
             elif c == Opcoes.game:
                 self.battle.mostrar_jogo()
 
+            # OPÇÃO 5
             elif c == Opcoes.reiniciar:
                 self.battle.reiniciar_game()
                 Console.clear()
@@ -87,12 +72,12 @@ class BattleInit(object):
 
             elif c == Opcoes.clear:
                 Console.clear()
-
+            # OPÇÃO 6 - SAIR
             else:
-               print("Opção inválida!")
+               print("Opção inválida! \n")
 
             self.mostrar_opcoes()
 
-            c = input("Escolha a opcão desejada\n")
+            c = input("Informe uma opção: \n")
 
         print("Tchau! :)")

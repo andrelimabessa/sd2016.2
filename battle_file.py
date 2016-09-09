@@ -3,8 +3,8 @@ import json
 
 
 class Info:
-    file = "battleship.json"
-    dir = "db"
+    file = "battleship.json" # ARQUIVO
+    dir = "db" # DIRETORIO
     def __init__(self):
         pass
 

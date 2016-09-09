@@ -1,7 +1,4 @@
 {
-    "max":5,
-    "rows":5,
-    "cols":5,
     "board":[
         [
             1,
@@ -39,5 +36,8 @@
             1
         ]
     ],
-    "count":0
+    "count":0,
+    "rows":5,
+    "max":5,
+    "cols":5
 }
