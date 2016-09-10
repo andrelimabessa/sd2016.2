@@ -36,6 +36,6 @@ class Database(object):
             json.dump(db, outfile, indent=4, sort_keys=False, separators=(',', ':'))
 
     def remove(self):
-	    if self.has_saved_game():
+	    if self.has_saved():
 	        os.remove(os.path.join(Info.dir, Info.file))
 	        os.rmdir(Info.dir)

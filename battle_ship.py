@@ -100,4 +100,4 @@ class BattleShip(object):
                 self.board[x][y] = Objeto.abatido
             else:
                 self.board[x][y] = Objeto.bomba
-            self.save()        
+            self.salvar()        
