@@ -2,10 +2,10 @@ import sys
 from udp_server import server
 from udp_cliente import client
 
-print("Você quer executar:")
+print("Voce quer executar:")
 print("1 para servidor")
 print("2 para cliente")
-opcao = input("Opção:")
+opcao = input("Opcao:")
 
 try:
     if int(opcao) == 1:
@@ -15,7 +15,7 @@ try:
         print("Cliente ativado:\n")
         client()
 
-except : # pega todas possíveis
+except :
     for val in sys.exc_info():
         print(val)
 
