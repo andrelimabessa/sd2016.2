@@ -6,12 +6,13 @@ class BatalhaNaval(object):
 	def __init__(self, numeroDeJogadas):
 		self.matriz = [["~" for j in range(5)] for i in range(5)]
 		self.numeroDeJogadas = numeroDeJogadas
-		if self.existeJogo():
-			self.carregaPosicoesBarcos()
-			self.carregaAcertos()
-			self.carregaNumeroJogadas()
-		else:
-			self.initBarcos()
+		#		if self.existeJogo():
+		#			self.carregaPosicoesBarcos()
+		#			self.carregaAcertos()
+		#			self.carregaNumeroJogadas()
+		#		else:
+		#	self.initBarcos()
+		self.initBarcos()
 
 	def initBarcos(self):
 		for i in range(3):
@@ -48,21 +49,23 @@ class BatalhaNaval(object):
 
 # Jogada-----------------------------------------------------------------------------------
 
-	def jogada(self):
-		print("Jogadas disponiveis: " + str(self.numeroDeJogadas))
-		eixoX = int(input("Insira a coordenada do eixo X: "))
-		eixoY = int(input("Insira a coordenada do eixo Y: "))
+	def jogada(self, eixoX, eixoY):
+#		print("Jogadas disponiveis: " + str(self.numeroDeJogadas))
+#		eixoX = int(input("Insira a coordenada do eixo X: "))
+#		eixoY = int(input("Insira a coordenada do eixo Y: "))
 		if self.matriz[eixoX][eixoY] == "@":
 			self.matriz[eixoX][eixoY] = "*"
 			self.salvaLogDoTabuleiro(self.matriz)
 			self.salvaLogDeAcerto(eixoX, eixoY)
 			self.decrementaJogada()
-			print("Acertou o barco!")
+			trailMessage = "Acertou o barco!"
 		elif self.matriz[eixoX][eixoY] == "~":
 			self.decrementaJogada()
-			print("Acertou a agua!")
+			trailMessage = "Acertou a agua!"
 		else:
-			print("Barco ja afundado. \n Tente novamente.")
+			trailMessage = "Barco ja afundado. \n Tente novamente."
+
+		return trailMessage
 
 	def decrementaJogada(self):
 		self.numeroDeJogadas -= 1
