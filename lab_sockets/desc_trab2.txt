@@ -1,0 +1,41 @@
+
+Implementar o jogo batalha naval, utilizando sockets em Python, para implementar
+a possibilidade de que 2 jogodores possam disputar uma partida,
+utilizando um mesmo tabuleiro.
+
+O servidor deverá gerenciar as jogadas, informando aos jogadores da partida, o
+status do jogo.
+
+Passo-a-passo:
+
+Um jogador solicita conexão:
+  # o servidor aceita a conexão e insere jogador na lista de jogadores_online
+   -- a lista jogadores_online pode ter um ou mais jogadores online
+
+Um jogador informa que deseja iniciar uma partida:
+  #1 o servidor verifica se há partidas iniciadas
+  #2 caso não-haja partidas disponíveis, o servidor cria nova partida,
+      e cadastra o jogador automaticamente na partida criada
+     -- ao criar a nova partida, o servidor posiciona aleatoriamente os
+        navios no tabuleiro
+    --  envia dados da partida ao jogador
+  #3 caso haja partidas iniciadas, o servidor informa as partidas disponíveis
+
+O jogador seleciona a partida que deseja entrar:
+    # servidor cadastra o jogador na partida informada e envia os dados da partida
+    ao jogador
+O jogador, opcionalmente pode informar que deseja criar um nova partida
+    # servidor cria nova partida, cadastrando o jogador para a partida criada
+
+O jogador envia jogada, informando a posição(x,y) de ataque
+  # servidor recebe jogada, analisa jogada e retorna status da partida ao jogador
+
+Premissas:
+  # o servidor mantém uma instancia do jogo por jogador
+  # o servidor mantém a lista de jogadores online (thread)
+  # se jogador estiver inativo por 120 segundo, será considerado inativo e
+    será removido da partida
+  # o tabuleiro terá tamanho fixo: 8x8
+  # o total de návios posicionados no tabuleiro será 1/4 do total de posições
+    possíveis, ou seja, 64/4 = 16 navios;
+  # um jogador ataca o tabuleiro do outro
