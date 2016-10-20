@@ -1,0 +1,7 @@
+Execute os bats na seguinte ordem
+
+1 - inicia_device.bat
+2 - inicia_servidor.bat
+3 - inicia_cliente.bat
+
+para cada novo jogado, executar o inicia_cliente.bat
