@@ -17,6 +17,7 @@ class Servidor():
 	"""docstring for ClassName"""
 	def __init__(self):
 		self.jogo = BatalhaNaval(5, 5)		
+		self.jogo.carregarJogo()
 
 	def iniciar(self):
 		self.iniciarEscuta()
@@ -39,6 +40,9 @@ class Servidor():
 				# executa comando
 				resultado = self.tratar_conexao(socket, message)
 
+				## salva jogo
+				self.jogo.salvarJogo()
+				
 				# envia requisição com retono de comando
 				data = resultado.encode("UTF-8")
 				socket.send(data)

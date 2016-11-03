@@ -1,3 +1,4 @@
+import os.path
 from jogador import Jogador
 from tabuleiro import Tabuleiro
 
@@ -68,3 +69,87 @@ class BatalhaNaval(object):
 				return 2 # Água
 		else:
 			print("////// Sem jogadas restante ///////")
+
+	def salvarJogo(self):
+		arq = open("log.txt", "w")
+		
+		## linha 0 | tamanho
+		arq.write("{0}|".format(self.tamanho))		
+
+		arq.write("\n")
+
+		## linha 1 | jogadores		
+		for jog in self.jogadores: 
+			arq.write("{0}|".format(jog.nick))		
+
+		arq.write("\n")
+		
+		## linha 2 | posições verificadas
+		verificadas = self.tabuleiro.obterPosicoesVerificadas()
+		for pos in verificadas:
+			arq.write("{0},{1}|".format(pos["linha"], pos["coluna"]))
+					
+		arq.write("\n")
+					
+		## linha 3 | barcos
+		barcos = self.tabuleiro.obterBarcos()		
+		for pos in barcos:
+			arq.write("{0},{1}|".format(pos["linha"], pos["coluna"]))
+		
+		arq.write("\n")
+		
+		## linha 4 | acertos
+		acertos = self.tabuleiro.obterPosicoesAcerto()		
+		for pos in acertos:
+			arq.write("{0},{1}|".format(pos["linha"], pos["coluna"]))		
+
+		print("\n*** jogo salvo ***")
+
+	def carregarJogo(self):		
+		arq = []
+		
+		if not os.path.exists("log.txt"):
+			print("\n**** Nao ha dados de jogo salvo ****")
+			return False
+		else:
+			arq = open("log.txt", "r")
+			
+			## linha 0
+			linha0 = arq.readline()
+			valores0 = linha0.split("|")			
+			self.tamanho = int(valores0[0])			
+
+			## linha 1
+			linha1 = arq.readline()
+			valores1 = linha1.split("|")
+			for val1 in valores1:
+				self.incluirJogador(val1)
+
+			## linha 2 -- posições verificadas
+			linha2 = arq.readline()		
+			valores2 = linha2.split("|")
+			for val2 in valores2:
+				pos = val2.split(",")			
+				if pos[0] != "\n" and pos[0] != "":
+					self.tabuleiro.marcarPosicaoVerificada(int(pos[0]), int(pos[1]))			
+					
+			## linha 3 -- barcos
+			linha3 = arq.readline()		
+			valores3 = linha3.split("|")		
+			for val3 in valores3:
+				pos = val3.split(",")			
+				if pos[0] != "\n" and pos[0] != "":
+					self.tabuleiro.definirBarco(int(pos[0]), int(pos[1]))
+
+
+			## linha 4 -- acertos
+			linha4 = arq.readline()		
+			valores4 = linha4.split("|")		
+			for val4 in valores4:
+				pos = val4.split(",")			
+				if pos[0] != "\n" and pos[0] != "":
+					self.tabuleiro.definirAcerto(int(pos[0]), int(pos[1]))				
+
+			print("\n*** jogo carregado ***")				
+			
+			return True		
