@@ -6,12 +6,13 @@ import socket
 import sys
 import struct
 import time
+import zmq
 from prettytable import PrettyTable
 
 class BatalhaNaval(object):
   
   SAVEFILE = "savefile.dat"
-  VERSAO = "0.2"
+  VERSAO = "0.4"
   linhas = 5
   colunas = 5
   
@@ -29,6 +30,11 @@ class BatalhaNaval(object):
     server_address = (host, port)
     print('connecting to {0} port {1}'.format(host, port), file=sys.stderr)
     sock.connect(server_address)
+	
+  def conectaServidorZMQ(self, sock, host, port):
+    # Connect the ZMQ server
+    print('connecting to {0} port {1}'.format(host, port), file=sys.stderr)
+    sock.connect ("tcp://localhost:%s" % port)
     
   def desconectaServidor(self, sock):
     sock.close()
@@ -37,10 +43,15 @@ class BatalhaNaval(object):
     data = pickle.dumps(dict(cmd=cmd, data=data))
     print(cmd)
     sock.sendall(data)
+	
+  def enviaComandoZMQ(self, sock, cmd, data):
+    data = pickle.dumps(dict(cmd=cmd, data=data))
+    print(cmd)
+    sock.send(data)
     
   def recebeComando(self, sock):
     #make socket non blocking
-#    sock.setblocking(0)
+    #sock.setblocking(0)
     connData = sock.recv(8192)
     
     try:
@@ -49,6 +60,19 @@ class BatalhaNaval(object):
       return {}
     
     return data
+	
+  def recebeComandoZMQ(self, sock):
+    #make socket non blocking
+    #sock.setblocking(0)
+    connData = sock.recv(8192)
+    
+    try:
+      data = pickle.loads(connData)
+    except EOFError:
+      return {}
+    
+    return data
+
     
 #  def recebeComando(self, sock, timeout):
 #      #make socket non blocking
