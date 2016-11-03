@@ -22,18 +22,18 @@ def executa_comando(comando):
 	elif comando == 1:
 		x = int(input('Insira a posição X para inserir navio: '))
 		y = int(input('Insira a posição y para inserir navio: '))
-		jogo.insere_navio(x, y)
+		print(jogo.insere_navio(x, y))
 		return 1
 	elif comando == 2:
 		x = int(input('Insira a posição X para destruir navio: '))
 		y = int(input('Insira a posição y para destruir navio: '))
-		jogo.destroi_navio(x, y)
+		print(jogo.destroi_navio(x, y))
 		return 2
 	elif comando == 3:
-		jogo.exibe_tabuleiro_simples()
+		print(jogo.exibe_tabuleiro_simples())
 		return 3
 	elif comando == 4:
-		jogo.salvar()
+		print(jogo.salvar())
 		return 4
 
 def inicia_jogo():

@@ -1,3 +1,4 @@
+#coding: utf-8
 import base64
 import random
 class BatalhaNaval(object):
@@ -12,25 +13,31 @@ class BatalhaNaval(object):
 	# 	self.tabuleiro = [[self.AGUA for x in range(w)] for y in range(h)] 
 
 	def insere_navio(self, x, y):
-			self.tabuleiro[x][y] = self.NAVIO
-			self.MAX_JOGADAS -= 1
+		self.tabuleiro[x][y] = self.NAVIO
+		self.MAX_JOGADAS -= 1
+		return "Navio inserido na posicao" + str(x) + " - " + str(y)
+
 
 	def destroi_navio(self, x, y):
 		if self.MAX_JOGADAS > 0:
+			self.MAX_JOGADAS -= 1
 			if self.tabuleiro[x][y] == self.NAVIO:
 				self.tabuleiro[x][y] = self.NAUFRAGIO
-				print("---------------------------------------------------------\n\n")
-				print("^.................. Navio naufragado ..................^")
-				print("\n\n---------------------------------------------------------")
+				# print("---------------------------------------------------------\n\n")
+				# print("^.................. Navio naufragado ..................^")
+				# print("\n\n---------------------------------------------------------")
+				return "Navio naufragado"
 			else:
-				print("---------------------------------------------------------\n\n")
-				print("^.................. Errrrôôôooo ..................^")
-				print("\n\n---------------------------------------------------------")
-			self.MAX_JOGADAS -= 1
+				# print("---------------------------------------------------------\n\n")
+				# print("^.................. Errrrôôôooo ..................^")
+				# print("\n\n---------------------------------------------------------")
+				return "Errou"
 		else:
-			print("JOGADAS EXCEDIDAS")
+			# print("JOGADAS EXCEDIDAS")
+			return "JOGADAS EXCEDIDAS"
 
 	def exibe_tabuleiro(self):
+		str_tabuleiro = ""
 		for i in range(len(self.tabuleiro)):
 			linha = "|"
 			for j in range(len(self.tabuleiro[i])):
@@ -40,14 +47,18 @@ class BatalhaNaval(object):
 					linha = linha + " " + "NAVIO" + " |"
 				elif self.tabuleiro[i][j] == self.NAUFRAGIO:
 					linha = linha + " " + "NAUFRAGIO" + " |"
-			print(linha)
+				str_tabuleiro = str_tabuleiro + linha + "\n"
+		return str_tabuleiro
 
 	def exibe_tabuleiro_simples(self):
+		str_tabuleiro = ""
 		for i in range(len(self.tabuleiro)):
-			print(self.tabuleiro[i])
+			# print(self.tabuleiro[i])
+			str_tabuleiro = str_tabuleiro + str(self.tabuleiro[i]) + "\n"
+		return str_tabuleiro
 
-	def salva_estado_do_jogo(self):
-		print("Salvando")
+	# def salva_estado_do_jogo(self):
+		# print("Salvando")
 
 	def to_json(self):
 		json = {
@@ -62,6 +73,7 @@ class BatalhaNaval(object):
 	def salvar(self):
 		json_string = str(self.to_json())
 		self.escreve_arquivo(json_string)
+		return "Jogo Salvo"
 
 	def escreve_arquivo(self, string):
 		arquivo = open(BatalhaNaval.NOME_DO_ARQUIVO,'w+')
