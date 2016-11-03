@@ -12,7 +12,7 @@ def client():
     text = input("Digite algum texto:\n")   		    # Recebe dados
     data = text.encode(ENCODE)				    # Codifica para BASE64 os dados de entrada	
     
-    #Enviod de dados
+    #Envio de dados
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM) # Inicializar um socket UDP
     dest = (HOST, PORT)                                     # Define IP de origem e Porta de destino  
     sock.sendto(data, dest)                                 # Envia os dados para o destino
