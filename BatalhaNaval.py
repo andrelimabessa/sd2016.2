@@ -50,8 +50,6 @@ class BatalhaNaval(object):
     sock.send(data)
     
   def recebeComando(self, sock):
-    #make socket non blocking
-    #sock.setblocking(0)
     connData = sock.recv(8192)
     
     try:
@@ -62,8 +60,6 @@ class BatalhaNaval(object):
     return data
 	
   def recebeComandoZMQ(self, sock):
-    #make socket non blocking
-    #sock.setblocking(0)
     connData = sock.recv(8192)
     
     try:
@@ -71,45 +67,7 @@ class BatalhaNaval(object):
     except EOFError:
       return {}
     
-    return data
-
-    
-#  def recebeComando(self, sock, timeout):
-#      #make socket non blocking
-#      sock.setblocking(0)
-#       
-#      #total data partwise in an array
-#      total_data=bytes()
-#      #data='';
-#       
-#      #beginning time
-#      begin=time.time()
-#      while 1:
-#          #if you got some data, then break after timeout
-#          if total_data and time.time()-begin > timeout:
-#              break
-#           
-#          #if you got no data at all, wait a little longer, twice the timeout
-#          elif time.time()-begin > timeout*2:
-#              break
-#           
-#          #recv something
-#          try:
-#              data = pickle.loads(sock.recv(8192))
-#              print(data)
-#              if data:
-#                  total_data = data
-#                  #change the beginning time for measurement
-#                  begin = time.time()
-#              else:
-#                  #sleep for sometime to indicate a gap
-#                  time.sleep(0.1)
-#          except:
-#              pass
-#       
-#      #join all parts to make final string
-#      print(total_data)
-#      return total_data
+    return data  
  
   def iniciaTabuleiro(self):
     barcosInseridos = 0
@@ -129,7 +87,11 @@ class BatalhaNaval(object):
   def imprimeTabuleiro(self):
     print("-=-=-=-=-=-=-=-=-=-=-=-=\tTabuleiro\t-=-=-=-=-=-=-=-=-=-=-=-=\n\n")
     print((pd.DataFrame(self.tabuleiro, columns=['A', 'B', 'C', 'D', 'E']))) 
-   
+ 
+  def imprimeTabuleiroRPYC(self):
+    print("-=-=-=-=-=-=-=-=-=-=-=-=\tTabuleiro\t-=-=-=-=-=-=-=-=-=-=-=-=\n\n")
+    print(self.tabuleiro)
+    
   def restauraJogo(self):
     with open(self.SAVEFILE, 'rb') as f:
       savedata = pickle.load(f)
