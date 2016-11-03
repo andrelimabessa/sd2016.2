@@ -1,16 +1,22 @@
-class Menu(object):
-    print("1 - Começar a Jogar")
-    print("2 - Sair")
+import sys
+from udp_server import server
+from udp_cliente import client
 
-    opcao = input("Digite o numero da opcao desejada ------/" )
+print("Você quer executar:")
+print("1 para servidor")
+print("2 para cliente")
+opcao = input("Opção:")
 
-    if int(opcao)==1:
-        from batalha import Hello
+try:
+    if int(opcao) == 1:
+        print("Servidor ativado:\n")
+        server()
+    elif int(opcao) == 2:
+        print("Cliente ativado:\n")
+        client()
 
-        h = Hello()
+except : # pega todas possíveis
+    for val in sys.exc_info():
+        print(val)
 
-        h.jogo()
-    else:
-        exit()
-
-
+input()
