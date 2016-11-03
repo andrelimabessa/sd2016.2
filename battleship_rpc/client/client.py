@@ -1,9 +1,8 @@
-#! /usr/bin/env python
 from client.board import Board
 from client.console import Console
 from client.exception.invalid_column import InvalidColumnException
 from client.exception.invalid_row import InvalidRowException
-from client.exception.exceeded_maxmove import MaxMoveExceededException
+from client.exception.max_move_exceeded import MaxMoveExceededException
 from client.printer import Printer
 from client.socket import Sock
 from client.file import ClientFile
@@ -34,7 +33,6 @@ class Client(object):
         self.load_board()
 
         Printer.print_choice()
-
         choice = input('Escolha uma opção:\n')
 
         while choice != Client.EXIT:
@@ -67,7 +65,7 @@ class Client(object):
 
         if status == Protocol.Response.STATUS_SUCCESS:
             self.id = username
-            self.file = ClientFile(_id=username)
+            self.storage = ClientFile(_id=username)
         else:
             Printer.print_connecting_error()
             self.connect()
@@ -75,11 +73,13 @@ class Client(object):
     def move(self):
         row = input('>> Linha.\n')
         col = input('>> Coluna.\n')
+
         if row.isdigit() and col.isdigit():
+
             try:
                 self.board.move(row=int(row), col=int(col))
                 self.save_board()
-            except (InvalidRowException, InvalidColumnException, MaxMoveExceededException) as e:
+            except (InvalidRowValueException, InvalidColumnValueException, MaxMoveValueExceededException) as e:
                 Printer.print_exception(exception=e)
                 Printer.print_message('Ignoring this move per now.\n')
 
@@ -124,8 +124,8 @@ class Client(object):
         print('')
 
     def load_board(self):
-        if self.file.has_data():
-            self.board.load_from_state(state=self.file.load_state())
+        if self.storage.has_data():
+            self.board.load_from_state(state=self.storage.load_state())
             self.save_board()
         else:
             self.send_load_board_request(username=self.id)
@@ -141,7 +141,7 @@ class Client(object):
     def save_board(self):
         board_state = self.board.state()
         self.send_save_board_request(username=self.id, state=board_state)
-        self.file.save_state(state=board_state)
+        self.storage.save_state(state=board_state)
 
         result = self.await()
         status = result['status']

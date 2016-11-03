@@ -87,7 +87,6 @@ class Client(object):
         row = input('>> Linha.\n')
         col = input('>> Coluna.\n')
 
-        #if self.is_value_integer(row) and self.is_value_integer(col):
         if row.isdigit() and col.isdigit():
 
             self.send_move_request(username=self.id, row=int(row), col=int(col))
