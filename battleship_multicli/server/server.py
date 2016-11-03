@@ -24,9 +24,7 @@ class Server(object):
     def start(self):
         origin = ("0.0.0.0", Common.PORT)
         self.logger.info("Listening at %s:%s" % (origin[0], str(origin[1])))
-
         sock = FlowController.bind(origin=origin)
-
         while True:
             data, address = self.__wait__(sock=sock)
             value = Serializer.from_binary_json(data=data)
@@ -34,7 +32,6 @@ class Server(object):
             _type = value['type']
 
             self.logger.info('Handling value: ' + str(value))
-
             if _id is None:
                 Sock.send_status(sock=sock, address=address, status=Protocol.Response.STATUS_FAILED)
             elif _type == Protocol.Request.DISCONNECT:
@@ -56,12 +53,10 @@ class Server(object):
                 first = self.awaiting
                 second = (_id, address)
                 self.logger.info('Binding "%s" and "%s"' % (str(first[0]), str(second[0])))
-
                 self.active.append((first, second))
                 self.awaiting = None
 
                 FlowController.start_game(_id=_id, active=self.active, storage=self.storage)
-
                 Sock.send(sock=sock, address=first[1],
                           data={
                               'status': Protocol.Response.STATUS_SUCCESS,

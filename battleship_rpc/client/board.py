@@ -31,7 +31,6 @@ class Board(object):
 
         for i in range(int((rows * cols) / 2)):
             board[randint(0, rows - 1)][randint(0, cols - 1)] = Unit.SHIP
-
         return board
 
     def __initial_state(self):
@@ -74,10 +73,8 @@ class Board(object):
             raise MaxMoveValueExceededException(move=self.moves + 1)
         else:
             self.moves += 1
-
             row -= 1
             col -= 1
-
             value = self.board[row][col]
             if value == Unit.SHIP or value == Unit.SUNK_SHIP:
                 self.board[row][col] = Unit.SUNK_SHIP

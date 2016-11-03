@@ -32,15 +32,12 @@ class Client(object):
     def start(self):
         self.connect()
         self.load_board()
-
         Printer.print_choice()
-
         choice = input('Escolha uma opção:\n')
 
         while choice != Client.EXIT:
             Console.clear()
             Printer.print_remaining_moves(self.board.remaining_moves())
-
             if choice == Client.MOVE:
                 self.print_board()
                 self.move()
@@ -54,7 +51,6 @@ class Client(object):
                 Console.clear()
             else:
                 Printer.print_invalid_choice()
-
             Printer.print_choice()
             choice = input('Escolha uma opção:\n')
 
@@ -64,7 +60,6 @@ class Client(object):
 
         result = self.await()
         status = result['status']
-
         if status == Protocol.Response.STATUS_SUCCESS:
             self.id = username
             self.file = ClientFile(_id=username)
@@ -89,9 +84,7 @@ class Client(object):
 
     def print_board(self):
         self.__print_board_legend()
-
         print('------------- Tabuleiro -------------', end='\n\n')
-
         for x in range(self.board.rows):
             for y in range(self.board.cols):
                 value = self.board.board[x][y]
@@ -106,9 +99,7 @@ class Client(object):
 
     def print_real_board(self):
         self.__print_board_legend()
-
         print('------------- Tabuleiro -------------', end='\n\n')
-
         for x in range(self.board.rows):
             for y in range(self.board.cols):
                 value = self.board.board[x][y]
@@ -129,23 +120,18 @@ class Client(object):
             self.save_board()
         else:
             self.send_load_board_request(username=self.id)
-
             result = self.await()
             status = result['status']
-
             if status == Protocol.Response.STATUS_SUCCESS:
                 self.board.load_from_state(state=result['data'])
-
             self.save_board()
 
     def save_board(self):
         board_state = self.board.state()
         self.send_save_board_request(username=self.id, state=board_state)
         self.file.save_state(state=board_state)
-
         result = self.await()
         status = result['status']
-
         if status == Protocol.Response.STATUS_FAILED:
             Printer.print_message('ERRO ao tenter enviar tabeleiro ao servidor!')
 

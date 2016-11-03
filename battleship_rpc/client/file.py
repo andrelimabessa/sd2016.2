@@ -1,7 +1,6 @@
 from common.common import Common
 from common.file import File
 
-
 class ClientFile(object):
     FORMAT = 'json'
     FILE_NAME = '%s%s%s' % ('data', '.', FORMAT)
@@ -16,10 +15,8 @@ class ClientFile(object):
     def create_files_if_needed(self):
         if not File.exists(name=self.base_dir):
             File.mkd(name=self.base_dir)
-
         if not File.exists(name=self.profile_dir):
             File.mkd(name=self.profile_dir)
-
         if not File.exists(name=self.data_file_name):
             File.create(name=self.data_file_name)
 

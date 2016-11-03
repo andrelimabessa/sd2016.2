@@ -1,6 +1,5 @@
 from common.common import Common
 
-
 class Printer(object):
     @staticmethod
     def print_connecting_error():

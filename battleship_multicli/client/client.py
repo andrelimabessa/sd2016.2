@@ -23,7 +23,6 @@ class Client(object):
 
     def __handle_await_response(self, response):
         if response['status'] == Protocol.Response.STATUS_FAILED:
-
             print('Tente novamente...')
             response['status'] = Protocol.Response.STATUS_SUCCESS
             self.__handle_await_response(response=response)
@@ -37,13 +36,10 @@ class Client(object):
             self.shutdown()
 
         elif response['data']['you_play']:
-
             Console.clear()
             self.print_board()
             print('>>Você Joga ... :)')
-
             move_success = self.move()
-
             if move_success:
                 Console.clear()
                 self.print_board()
@@ -62,15 +58,12 @@ class Client(object):
     def connect(self):
         username = input('Informe seu apelido...\n')
         self.send_connection_request(username=username)
-
         result = self.await()
         status = result['status']
-
         if status == Protocol.Response.STATUS_AWAITING:
             print('\n>>Aguardando adversário!')
             result = self.await()
             status = result['status']
-
         if status == Protocol.Response.STATUS_SUCCESS:
             self.id = username
             print('\n>>Jogando com \"%s\". :)\n' % str(result['data']['opponent']))
@@ -86,14 +79,10 @@ class Client(object):
     def move(self):
         row = input('>> Linha.\n')
         col = input('>> Coluna.\n')
-
         if row.isdigit() and col.isdigit():
-
             self.send_move_request(username=self.id, row=int(row), col=int(col))
-
             result = self.await()
             status = result['status']
-
             if status == Protocol.Response.STATUS_SUCCESS:
                 self.board.move(row=int(row), col=int(col))
                 return True
@@ -103,9 +92,7 @@ class Client(object):
 
     def print_board(self):
         self.__print_board_legend()
-
         print('------------- Tabuleiro -------------', end='\n\n')
-
         for x in range(self.board.rows):
             for y in range(self.board.cols):
                 value = self.board.board[x][y]
@@ -120,20 +107,16 @@ class Client(object):
 
     def load_board(self):
         self.send_load_board_request(username=self.id)
-
         result = self.await()
         status = result['status']
-
         if status == Protocol.Response.STATUS_SUCCESS:
             self.board.load_from_state(state=result['data'])
 
     def save_board(self):
         board_state = self.board.state()
         self.send_save_board_request(username=self.id, state=board_state)
-
         result = self.await()
         status = result['status']
-
         if status == Protocol.Response.STATUS_FAILED:
             print('ERRO ao tenter enviar tabeleiro ao servidor!')
 

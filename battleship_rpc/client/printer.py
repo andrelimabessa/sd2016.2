@@ -4,7 +4,7 @@ from common.common import Common
 class Printer(object):
     @staticmethod
     def print_connecting_error():
-        print('An error ocurred trying to connect with server. Please, try again.')
+        print('Erro ao tentar conectar no servidor. Tente novamente!')
 
     @staticmethod
     def print_choice():
