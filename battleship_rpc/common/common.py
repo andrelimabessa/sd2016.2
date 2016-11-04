@@ -3,6 +3,6 @@ class Common(object):
     BYTES = 655350
     ENCODE = 'UTF-8'
     HOST = 'localhost'
-    PORT = 3000
+    PORT = 7002
     DATA_FOLDER_NAME = 'data'
     TIMEOUT = 3

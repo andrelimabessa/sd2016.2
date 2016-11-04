@@ -8,13 +8,13 @@ class ServerFile(object):
     DIR_NAME = 'server'
 
     def __init__(self):
-        self.base_dir = File.join_path(a=Common.DATA_FOLDER_NAME, b=ServerFile.DIR_NAME)
+        self.base_dir = File.join_path(a=Common.DATA_FOLDER_NAME, b=ServerStorage.DIR_NAME)
 
     def get_base_dir(self, _id):
         return File.join_path(a=self.base_dir, b=_id)
 
     def get_file_name(self, _id):
-        return File.join_path(a=self.get_base_dir(_id=_id), b=ServerFile.FILE_NAME)
+        return File.join_path(a=self.get_base_dir(_id=_id), b=ServerStorage.FILE_NAME)
 
     def create_files_if_needed(self, _id):
         if not File.exists(name=self.base_dir):

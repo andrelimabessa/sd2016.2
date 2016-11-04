@@ -1,4 +1,3 @@
-
 class Protocol(object):
     class Request(object):
         CONNECT = 1

@@ -1,7 +1,5 @@
 import json
-
 from common.common import Common
-
 
 class Serializer(object):
     @staticmethod

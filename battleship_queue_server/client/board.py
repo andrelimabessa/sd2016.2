@@ -23,23 +23,22 @@ class Board(object):
         self.cols = cols
         self.max_move = max_move
         self.moves = moves
-        self.board = board if board else self.__create(rows=rows, cols=cols)
+        self.board = board if board else self.create(rows=rows, cols=cols)
 
     @staticmethod
-    def __create(rows=DEFAULT_ROWS, cols=DEFAULT_COLUMNS):
+    def create(rows=DEFAULT_ROWS, cols=DEFAULT_COLUMNS):
         board = [[Unit.WATER for x in range(rows)] for y in range(cols)]
         for i in range(int((rows * cols) / 2)):
             board[randint(0, rows - 1)][randint(0, cols - 1)] = Unit.SHIP
-
         return board
 
-    def __initial_state(self):
+    def initial_state(self):
         return {
             "rows": Board.DEFAULT_ROWS,
             "cols": Board.DEFAULT_COLUMNS,
             "max_move": Board.DEFAULT_MAX_MOVE,
             "moves": Board.DEFAULT_MOVES,
-            "board": self.__create()
+            "board": self.create()
         }
 
     def state(self):
@@ -59,18 +58,18 @@ class Board(object):
         self.board = state["board"]
 
     def restart(self):
-        self.load_from_state(state=self.__initial_state())
+        self.load_from_state(state=self.initial_state())
 
     def remaining_moves(self):
         return self.max_move - self.moves
 
     def move(self, row, col):
         if row - 1 < 0 or row > self.rows:
-            raise InvalidRowValueException(row_value=row)
+            raise InvalidRowException(row_value=row)
         elif col - 1 < 0 or col > self.cols:
-            raise InvalidColumnValueException(column_value=col)
+            raise InvalidColumnException(column_value=col)
         elif self.moves + 1 > self.max_move:
-            raise MaxMoveValueExceededException(move=self.moves + 1)
+            raise MaxMoveExceededException(move=self.moves + 1)
         else:
             self.moves += 1
             row -= 1

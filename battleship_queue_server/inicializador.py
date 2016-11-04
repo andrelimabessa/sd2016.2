@@ -12,7 +12,6 @@ class Inicializador(object):
 
     @staticmethod
     def client():
-
         Inicializador.start()
         try:
             client = Client()
@@ -22,7 +21,6 @@ class Inicializador(object):
             pass
         except:
             logging.exception("Erro no cliente!")
-
 
     @staticmethod
     def server():
@@ -39,7 +37,6 @@ class Inicializador(object):
             raise
         finally:
             server.shutdown()
-
 
         @staticmethod
         def queue_server():

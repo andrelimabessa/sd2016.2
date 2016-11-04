@@ -1,5 +1,6 @@
 import logging
 import zmq
+
 from common.common import Common
 
 class QueueServer(object):
@@ -21,4 +22,4 @@ class QueueServer(object):
         finally:
             client_socket.close()
             server_socket.close()
-context.term()
+            context.term()
