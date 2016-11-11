@@ -1,9 +1,5 @@
 1. Criar ambiente virtualenv
 
-    #Fa7
-    C:\Python35-32\Scripts\virtualenv -m C:\Python35-32\python.exe myvenv
-    myvenv\Scripts\activate
-
     #Linux
     pip install virtualenv
     virtualenv myvenv
@@ -52,7 +48,6 @@
             'django.contrib.sessions',
             'django.contrib.messages',
             'django.contrib.staticfiles',
-            'app'
         ]
 
 ------------------------------> Model <----------------------------------------
@@ -289,7 +284,7 @@
     Alterar:
 
         urlpatterns = [
-            url(r'^login/$', auth_views.login, name='login'),
+            url(r'^$', auth_views.login, name='login'),
             url(r'^logout/$', auth_views.logout, name='logout'),
             url(r'^teste/$', views.post_list),
         ]
@@ -298,6 +293,23 @@
     Adicionar:
 
         LOGIN_REDIRECT_URL = '/teste'
+
+    Criar dentro de 'templates' a pasta 'registration'
+    Criar dentro de 'templates\registration' 'login.html'     
+    Dentro de 'login.html' adicionar:
+
+        {% extends 'base.html' %}
+
+        {% block title %}Login{% endblock %}
+
+        {% block content %}
+        <h2>Login</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Login</button>
+        </form>
+        {% endblock %}
 
 16. Criar um Form para Enviar Jogadas
 
@@ -318,6 +330,8 @@
     Abra o arquivo "views.py" dentro da pasta "app"
     Altere:
 
+        from .forms import JogadaForm
+        
         def post_list(request):
             form = JogadaForm()
             return render(request, 'post_list.html', {'form': form})
@@ -343,6 +357,8 @@
     Abra o arquivo "views.py" dentro da pasta "app"
     Altere:
 
+        from django.utils import timezone
+        
         def post_list(request):
             
             if request.method == "POST":
@@ -375,7 +391,7 @@
     Alterar:
 
         urlpatterns = [
-            url(r'^login/$', auth_views.login, name='login'),
+            url(r'^$', auth_views.login, name='login'),
             url(r'^logout/$', auth_views.logout, name='logout'),
             url(r'^teste/$', views.post_list),
             url(r'^teste/tabuleiro/$', views.post_tabuleiro),
@@ -383,6 +399,8 @@
 
     Abra o arquivo "views.py" dentro da pasta "app"
     Alterar:
+
+        from django.shortcuts import redirect
 
         def post_list(request):
             
@@ -398,3 +416,6 @@
                 form = JogadaForm()
 
             return render(request, 'post_list.html', {'form': form})
+    
+        def post_tabuleiro(request):
+            return render(request, 'tabuleiro.html')
