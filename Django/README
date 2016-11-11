@@ -19,7 +19,7 @@
     django-admin startproject projeto
 
     #Windows
-    python myvenv\Scripts\django-admin.py startproject mysite .
+    python myvenv\Scripts\django-admin.py startproject projeto .
 
 3. Ajustando TIME_ZONE
 
