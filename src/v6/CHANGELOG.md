@@ -17,3 +17,9 @@ funcionalidades/
 - Navegação de app a partir do jogo  (/jogo/1/jogada, /jogo/1/jogada/new, /jogo/1/jogada/edit/2, /jogo/1/jogada/delete/4)
 - Exibição de jogadas de acordo com jogo atual definido na url  (/jogo/1/jogadas)
 
+Versão 1.2 - 07/12/2016
+
+funcionalidades/
+- Identificação de jogador vencedor
+- Finalização de jogo
+
