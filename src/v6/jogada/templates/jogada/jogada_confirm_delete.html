@@ -1,0 +1,12 @@
+{% extends 'base.html' %} 
+
+{% block content %}
+
+<form method="post">{% csrf_token %}
+    <div>
+        Tem certeza que deseja excuir "{{ object }}" ?
+        <input type="submit" value="Submit" />
+    </div>    
+</form>
+
+{% endblock %}

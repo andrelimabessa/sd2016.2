@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<h1>Jogos</h1>
+
+    <a href="{% url 'jogo:jogo_new' %}">New</a> <br><br>
+    <table>
+        <tr>
+            <th>Jogadores</th>
+            <th>Finalizado</th>
+            <th>Vencedor</th>
+            <th></th>                    
+        </tr>
+        {% for jogo in object_list %}
+        <tr>
+            <td>{{ jogo.jogador1.username }} vs {{ jogo.jogador2.username }}</td>
+            <td>{{ jogo.finalizado }}</td>
+            <td>{{ jogo.vencedor }}</td>
+            <td>
+                <a href="{% url 'jogo:jogo_edit' jogo.id %}">edit</a>
+                <a href="{% url 'jogo:jogo_delete' jogo.id %}">delete</a>
+                <a href="{% url 'jogo:jogo_jogadas' jogo.id %}">jogadas</a>
+            </td>
+        </tr>
+        {% endfor %}
+
+    </table>
+
+{% endblock %}

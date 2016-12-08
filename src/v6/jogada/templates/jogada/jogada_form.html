@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+    {% if messages %}
+        {% for message in messages %}
+        <div style="color: red">
+            <span>{{message}}</span>
+        </div>            
+        {% endfor %}
+    {% endif %}
+
+
+
+    <h3>Nova Jogada</h3>    
+
+    <a href="{% url 'jogada:jogada_list' jogoAtual.id %}">back</a> <br><br>
+
+    <form method="post">{% csrf_token %}        
+        <label>Jogo:</label>
+        <span>{{jogoAtual}}</span><br>
+        
+        <label>Autor:</label>
+        <span>{{autor}}</span><br>     
+
+        {{ form.as_p }}
+        <input type="submit" value="Submit" />    
+    </form>            
+
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends 'base.html' %} 
+
+{% block content %} 
+
+    {% if messages %} 
+        {% for message in messages %}
+        <div class="alert alert-danger">
+            <span>{{message}}</span>
+        </div>
+        {% endfor %} 
+    {% endif %}
+
+
+    <h3>Jogadas</h3>
+
+    {%  if jogo.vencedor %}
+
+        O vencedor é <b>{{jogo.vencedor.username}}</b>!!! <br/><br/>
+
+    {%  endif %}
+
+        
+    <a href="{% url 'jogada:jogada_new' jogoId %}">new</a>    
+    
+    <table>
+        <tr>
+            <th>Jogo</th>
+            <th>Autor</th>
+            <th>Linha</th>
+            <th>Coluna</th>
+            <th>Acerto</th>
+            <th></th>
+        </tr>
+        {% for jogada in object_list %}
+        <tr>
+            <td> {{ jogada.jogo.pk }} </td>
+            <td> {{ jogada.autor.username }} </td>
+            <td> {{ jogada.linha }} </td>
+            <td> {{ jogada.coluna }} </td>
+            <td> {{ jogada.acerto }} </td>
+            <td>                
+                
+            </td>
+        </tr>
+        {% endfor %}
+    </table>   
+{% endblock %}
