@@ -1,0 +1,4 @@
+*.pyc
+.pyc
+myvenv
+db.sqlite3
