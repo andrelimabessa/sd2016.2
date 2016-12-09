@@ -3,5 +3,11 @@
 {% block content %}
 
     <h1>Jogada Realizada</h1>
-
+	{% if msgAcerto %}
+		<ul><li>{{ msgAcerto }}</li></ul>
+	{% endif %}
+	
+	{% if msgError %}
+		<ul><li>{{ msgError }}</li></ul>
+	{% endif %}
 {% endblock %}

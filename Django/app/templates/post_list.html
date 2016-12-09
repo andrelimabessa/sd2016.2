@@ -3,9 +3,11 @@
 {% block content %}
 
     <h1>Nova Jogada</h1>
+	<!--<a href="gerarTabuleiro/">Gerar Novo Tabuleiro</a>-->
     <form method="POST" class="post-form">{% csrf_token %}
         {{ form.as_p }}
         <button type="submit" class="save btn btn-default">salvar</button>
+		<button id="tabuleiro" type="submit" class="save btn btn-default">gerar tabuleiro</button>
     </form>
 
 {% endblock %}
